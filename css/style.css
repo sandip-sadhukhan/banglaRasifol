@@ -1,0 +1,42 @@
+@import url('https://fonts.maateen.me/solaiman-lipi/font.css');
+
+body {
+    font-family: 'SolaimanLipi', sans-serif !important;
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #ecf0f1;
+}
+
+.form-container {
+    width: 400px;
+    margin: auto;
+}
+
+.img-header {
+    width: 30px;
+    height: 30px;
+}
+
+/* Card styling */
+.card-bg {
+    background: #0f0c29; 
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); 
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+}
+
+.card-inputgrp {
+    width: 80% !important;
+}
+
+
+
+@media(max-width:600px){
+    .card-inputgrp {
+        width: 100% !important;
+    }
+}
