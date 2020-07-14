@@ -40,17 +40,20 @@ body {
 
 /* Loading section */
 #loading{
-    display: block;
+    display: none; /* At First It doesn't show */
 }
 
 
-#inputs{
-    display: none;
+/* Result Div */
+#result {
+    display: none; /* At First It doesn't show */
 }
-#loading{
-    display: none;
+.resultdiv{
+    border-radius: 10px;
+    border: 2px solid #fff;
+    background-image: url("../img/result back.jpg") !important;
+    background-repeat: repeat;
 }
-
 
 @media(max-width:600px){
     .card-inputgrp {
