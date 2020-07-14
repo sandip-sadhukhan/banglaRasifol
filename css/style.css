@@ -8,6 +8,10 @@ body {
     color: #ecf0f1;
 }
 
+#inputs{
+    display: block;
+}
+
 .form-container {
     width: 400px;
     margin: auto;
@@ -33,6 +37,16 @@ body {
     width: 80% !important;
 }
 
+#inputs{
+    display: none;
+}
+
+#loading{
+    display: block;
+}
+#loading{
+    display: none;
+}
 
 
 @media(max-width:600px){
