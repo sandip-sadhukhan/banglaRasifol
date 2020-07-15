@@ -12,6 +12,9 @@ const favouriteColorUI = document.getElementById('favcolor');
 // Buttons
 const calculateBtnUI = document.getElementById('calculate-btn');
 const calculateAgainBtnUI = document.getElementById('calculate-again');
+const downloadPageBtnUI = document.getElementById('download-page');
+// Result page
+const resultPageUI = document.getElementById('result-div');
 
 
 // Validation
@@ -122,6 +125,14 @@ const calculateAgainHandler = () => {
     inputSectionUI.style.display="block";
 }
 
+// Download page handler
+const downloadPageHandler = () => {
+    html2pdf()
+        .set({ html2canvas: { scale: 4 } })
+        .from(resultPageUI)
+        .save();
+}
+
 // Event listeners
 userNameUI.addEventListener('input', nameValidate);
 dateOfBirthUI.addEventListener('input', dateValidate);
@@ -129,6 +140,7 @@ timeOfBirthUI.addEventListener('input', timeValidate);
 favouriteColorUI.addEventListener('input', favColorValidate);
 calculateBtnUI.addEventListener('click', calculateBtnHandler);
 calculateAgainBtnUI.addEventListener('click',calculateAgainHandler);
+downloadPageBtnUI.addEventListener('click', downloadPageHandler);
 
 
 // handle date and time
