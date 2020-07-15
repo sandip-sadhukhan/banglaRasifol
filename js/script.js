@@ -112,9 +112,9 @@ const validateAllInputs = () => {
 }
 
 // Luck from first english letter [small caps]
-const luckFromFirstLetter = (name) => {
+const luckFromFirstLetter = (name, birthdate, birthmonth) => {
     let firstCh = name[0].toLowerCase();
-    let luckString = luckFromFirstLettersDict[firstCh];
+    let luckString = luckFromFirstLettersDict[firstCh] + '\n' + luckFromBirthMonth(+birthdate, +birthmonth);
     // create a paragraph
     let paragraph = document.createElement("p");
     paragraph.innerText = luckString;
@@ -227,7 +227,7 @@ const calculateBtnHandler = () => {
         // find luck from color
         findLuckFromColor(data['favcolor']);
         // find luck from first letters
-        luckFromFirstLetter(data['name']);
+        luckFromFirstLetter(data['name'], sep[2], sep[1]);
         
 
     }
