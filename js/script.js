@@ -129,7 +129,7 @@ const luckyYearsFromBirthdate = (date) => {
         luckIndex = 8;
     }
     let luckyYears = luckFromBirthDateList[luckIndex];
-    let luckyYearsString = '<b>আপনার জীবনের গুরুরত্বপূর্ণ বছরগুলি হলো - </b>' + luckyYears.join(', ');
+    let luckyYearsString = '<i class="fa fa-arrow-circle-right"></i><b> আপনার জীবনের গুরুরত্বপূর্ণ বছরগুলি হলো - </b>' + luckyYears.join(', ');
     let paragraph = document.createElement("p");
     paragraph.innerHTML = luckyYearsString;
     paragraph.classList = "card-text text-dark text-justify";
@@ -148,7 +148,7 @@ const findJobFromBirthday = (sep) => {
             sum = 0;
         }
     }
-    let laboursInformation = "<b>আপনার চাকরি বা ব্যাবসায়ী ভাগ্য : </b>" + labourNumberToJobDict[sum];
+    let laboursInformation = "<i class='fa fa-arrow-circle-right'></i><b> আপনার চাকরি বা ব্যাবসায়ী ভাগ্য : </b>" + labourNumberToJobDict[sum];
     let paragraph = document.createElement("p");
     paragraph.innerHTML = laboursInformation;
     paragraph.classList = "card-text text-dark text-justify";
@@ -158,9 +158,33 @@ const findJobFromBirthday = (sep) => {
 
 // Find Luck from color
 const findLuckFromColor = (color) => {
-    let luckString ="<b>পছন্দের রঙ অনুযায়ী আপনার মন : </b>" + luckFromColorDict[color];
+    let luckString ="<i class='fa fa-arrow-circle-right'></i><b> পছন্দের রঙ অনুযায়ী আপনার মন : </b>" + luckFromColorDict[color];
     let paragraph = document.createElement("p");
     paragraph.innerHTML = luckString;
+    paragraph.classList = "card-text text-dark text-justify";
+    mainResultContent.appendChild(paragraph);
+}
+
+// Find lucky number from name
+const findLuckyNumberFromName = (name) => {
+    let value = 0;
+    for(let i=0;i<name.length;i++){
+        let ch = name.charAt(i).toLowerCase();
+        if(ch>="a" && ch<="z")
+            value += luckyNumberFromNameDict[ch];
+    }
+    let sum = 0;
+    while(value){
+        sum += value%10;
+        value = Math.floor(value/10);
+        if(value === 0 && sum>9){
+            value = sum;
+            sum = 0;
+        }
+    }
+    let luckyNumberInfo = "<i class='fa fa-arrow-circle-right'></i><b> আপনার লাকি নম্বর : </b>" + englishToBangaliNumber(sum.toString());
+    let paragraph = document.createElement("p");
+    paragraph.innerHTML = luckyNumberInfo;
     paragraph.classList = "card-text text-dark text-justify";
     mainResultContent.appendChild(paragraph);
 }
@@ -194,6 +218,8 @@ const calculateBtnHandler = () => {
         // clear previous result
         mainResultContent.innerHTML = '';
 
+        // find lucky number from name
+        findLuckyNumberFromName(data['name']);
         // find lucky years from birthdate
         luckyYearsFromBirthdate(birthdayDate.getDate());
         // find job/buisness form bithday
