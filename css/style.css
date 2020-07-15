@@ -57,6 +57,11 @@ body {
     background-repeat: repeat;
 }
 
+/* Copyright */
+#copyright{
+    display: block;
+}
+
 @media(max-width:600px){
     .card-inputgrp {
         width: 100% !important;

@@ -48,6 +48,7 @@
                             <div class="input-group-text"><i class="fa fa-user"></i></div>
                           </div>
                         <input type="text" class="form-control" id="name" placeholder="আপনার পুরো নাম লিখুন" autocomplete="off">
+                        <div class="invalid-feedback" id="name-feedback"></div>
                         </div>
                         <!-- date and time of birth -->
                         <div class="input-group mb-2">
@@ -55,12 +56,14 @@
                             <div class="input-group-text">জন্মতারিখ</div>
                           </div>
                         <input type="date" class="form-control" id="dob">
+                        <div class="invalid-feedback" id="dob-feedback"></div>
                         </div>
                         <div class="input-group mb-2">
                           <div class="input-group-prepend">
                             <div class="input-group-text">জন্মসময়</div>
                           </div>
-                        <input type="time" class="form-control" id="dob">
+                        <input type="time" class="form-control" id="tob">
+                        <div class="invalid-feedback" id="tob-feedback"></div>
                         </div>
                         <!-- Favarite color -->
                         <div class="input-group mb-2">
@@ -68,24 +71,25 @@
                             <div class="input-group-text"><i class="fa fa-heart"></i></div>
                           </div>
                           <select class="custom-select" id="favcolor">
-                            <option selected>আপনার পছন্দের রঙ বাছুন</option>
-                            <option value="1">কালো</option>   
-                            <option value="2">তামাটে</option>
-                            <option value="3">বেগুনি</option>
-                            <option value="3">লাল</option>
-                            <option value="3">কমলা</option>
-                            <option value="3">হলদে</option>
-                            <option value="3">সবুজ</option>
-                            <option value="3">নীল</option>
-                            <option value="3">সাদা</option>
+                            <option selected value="none">আপনার পছন্দের রঙ বাছুন</option>
+                            <option value="black">কালো</option>   
+                            <option value="chocolate">তামাটে</option>
+                            <option value="violet">বেগুনি</option>
+                            <option value="red">লাল</option>
+                            <option value="orange">কমলা</option>
+                            <option value="yellow">হলদে</option>
+                            <option value="green">সবুজ</option>
+                            <option value="blue">নীল</option>
+                            <option value="white">সাদা</option>
                           </select>
+                          <div class="invalid-feedback" id="select-feedback"></div>
                         </div>
                         
                      </form>
                     </div>
                   </div>
                   <div class="card-footer text-muted">
-                    <button class="btn btn-success"><i class="fa fa-hand-o-right"></i> ভাগ্য নির্ণয় করুন</button>
+                    <button id="calculate-btn" class="btn btn-success"><i class="fa fa-hand-o-right"></i> ভাগ্য নির্ণয় করুন</button>
                   </div>
                 </div>
               </div>
@@ -129,7 +133,7 @@
                   </div>
                 </div>
                 <div class="card-footer text-muted">
-                  <button class="btn btn-info">পুনরায় চেষ্টা করুন  <i class="fa fa-undo"></i></button>
+                  <button id="calculate-again" class="btn btn-info">পুনরায় চেষ্টা করুন  <i class="fa fa-undo"></i></button>
                 </div>
               </div>
             </div>
@@ -138,12 +142,13 @@
       </section>
 
       <!-- Copyright Section -->
-      <section id="copyright">
+      <section id="copyright-footer" class="container">
         <p class="my-2 text-muted text-center">Copyright &copy; 2020 Sandip Sadhukhan. All rights reserved.</p>
       </section>
 
-      
-
+       <!-- Script Sources -->
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
