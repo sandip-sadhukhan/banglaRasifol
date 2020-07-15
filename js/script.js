@@ -1,3 +1,7 @@
+// Rashifol.tk all rights reserved
+// Author : Sandip Sadhukhan
+
+
 // Get the Ui elements
 // sections
 const inputSectionUI = document.getElementById('inputs');
@@ -15,9 +19,10 @@ const calculateAgainBtnUI = document.getElementById('calculate-again');
 const downloadPageBtnUI = document.getElementById('download-page');
 // Result page
 const resultPageUI = document.getElementById('result-div');
+const mainResultContent = document.getElementById('main-result-content');
 
 
-// Validation
+// Functions
 // check for a string is alphabatic or not
 const isAlpha = (str) => {
     isalpha = true;
@@ -46,6 +51,7 @@ const nameValidate = () => {
     }
 }
 
+// Date of birth validation
 const dateValidate = () => {
     let date = dateOfBirthUI.value;
     if(date === ''){
@@ -58,6 +64,7 @@ const dateValidate = () => {
     }
 }
 
+// time of birth validation
 const timeValidate = () => {
     let time = timeOfBirthUI.value;
     if(time === ''){
@@ -70,6 +77,7 @@ const timeValidate = () => {
     }
 }
 
+// favourite color validation
 const favColorValidate = () => {
     let favColor = favouriteColorUI.value;
     if(favColor === "none"){
@@ -82,6 +90,7 @@ const favColorValidate = () => {
     }
 }
 
+// Validation of all inputs
 const validateAllInputs = () => {
     // Check for name
     name = nameValidate();
@@ -102,6 +111,60 @@ const validateAllInputs = () => {
     }
 }
 
+// Luck from first english letter [small caps]
+const luckFromFirstLetter = (name) => {
+    let firstCh = name[0].toLowerCase();
+    let luckString = luckFromFirstLettersDict[firstCh];
+    // create a paragraph
+    let paragraph = document.createElement("p");
+    paragraph.innerText = luckString;
+    paragraph.classList = "card-text text-dark text-justify";
+    mainResultContent.appendChild(paragraph);
+}
+
+// calculate lucky years from birthdate
+const luckyYearsFromBirthdate = (date) => {
+    let luckIndex = (date%9) - 1;
+    if (luckIndex === -1){
+        luckIndex = 8;
+    }
+    let luckyYears = luckFromBirthDateList[luckIndex];
+    let luckyYearsString = '<b>আপনার জীবনের গুরুরত্বপূর্ণ বছরগুলি হলো - </b>' + luckyYears.join(', ');
+    let paragraph = document.createElement("p");
+    paragraph.innerHTML = luckyYearsString;
+    paragraph.classList = "card-text text-dark text-justify";
+    mainResultContent.appendChild(paragraph);
+}
+
+// Calculate job from bithdate
+const findJobFromBirthday = (sep) => {
+    let value = sep[0] + sep[1] + sep[2];
+    let sum = 0;
+    while(value){
+        sum += value%10;
+        value = Math.floor(value/10);
+        if(value === 0 && sum>9){
+            value = sum;
+            sum = 0;
+        }
+    }
+    let laboursInformation = "<b>আপনার চাকরি বা ব্যাবসায়ী ভাগ্য : </b>" + labourNumberToJobDict[sum];
+    let paragraph = document.createElement("p");
+    paragraph.innerHTML = laboursInformation;
+    paragraph.classList = "card-text text-dark text-justify";
+    mainResultContent.appendChild(paragraph);
+}
+
+
+// Find Luck from color
+const findLuckFromColor = (color) => {
+    let luckString ="<b>পছন্দের রঙ অনুযায়ী আপনার মন : </b>" + luckFromColorDict[color];
+    let paragraph = document.createElement("p");
+    paragraph.innerHTML = luckString;
+    paragraph.classList = "card-text text-dark text-justify";
+    mainResultContent.appendChild(paragraph);
+}
+
 // calculate button handler
 const calculateBtnHandler = () => {
     let data = validateAllInputs();
@@ -115,8 +178,36 @@ const calculateBtnHandler = () => {
             resultSectionUI.style.display="block";
             copyrightSectionUI.style.display="block";
         },1000);
+        // Show Result
+        // print name and other birth info on top of the result [header]
+        document.getElementById('result-name').innerText = data['name'].toUpperCase();
+        // birthday seperation
+        let sep = data['dob'].split('-'); // yyyy-mm-dd
+        let birthdayDate = new Date();
+        birthdayDate.setDate(sep[2]);
+        birthdayDate.setMonth(+sep[1] -1);
+        birthdayDate.setFullYear(sep[0]);
+        document.getElementById('result-birthinfo').innerText = englishToBangaliNumber(birthdayDate.toLocaleDateString()) + " " + englishToBangaliNumber(data['tob']);
+        document.getElementById('result-birthday').innerText = dayToBanglaDayList[birthdayDate.getDay()];
+        
+        // main results
+        // clear previous result
+        mainResultContent.innerHTML = '';
+
+        // find lucky years from birthdate
+        luckyYearsFromBirthdate(birthdayDate.getDate());
+        // find job/buisness form bithday
+        findJobFromBirthday(sep);
+        // find luck from color
+        findLuckFromColor(data['favcolor']);
+        // find luck from first letters
+        luckFromFirstLetter(data['name']);
+        
+
     }
 }
+
+
 
 // Calculate Again Handler
 const calculateAgainHandler = () => {
