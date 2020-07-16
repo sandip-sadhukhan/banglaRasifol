@@ -112,9 +112,9 @@ const validateAllInputs = () => {
 }
 
 // Luck from first english letter [small caps]
-const luckFromFirstLetter = (name, birthdate, birthmonth) => {
+const otherLuck = (name, birthdate, birthmonth, birthhour, birthweekday) => {
     let firstCh = name[0].toLowerCase();
-    let luckString = luckFromFirstLettersDict[firstCh] + '\n' + luckFromBirthMonth(+birthdate, +birthmonth);
+    let luckString = luckFromFirstLettersDict[firstCh] + '\n'+ luckFromBirthTime(+birthhour) + luckFromBirthWeekdayList[birthweekday] +'\n'+ luckFromBirthMonth(+birthdate, +birthmonth);
     // create a paragraph
     let paragraph = document.createElement("p");
     paragraph.innerText = luckString;
@@ -241,7 +241,8 @@ const calculateBtnHandler = () => {
         // find luck from color
         findLuckFromColor(data['favcolor']);
         // find luck from first letters
-        luckFromFirstLetter(data['name'], sep[2], sep[1]);
+        otherLuck(data['name'], sep[2], sep[1],data['tob'].split(':')[0], birthdayDate.getDay());
+
     }
 }
 
@@ -257,7 +258,12 @@ const calculateAgainHandler = () => {
 // Download page handler
 const downloadPageHandler = () => {
     html2pdf()
-        .set({ html2canvas: { scale: 4 } })
+        .set({ 
+            html2canvas: { scale: 4 },
+            margin:1,
+            jsPDF:{format: 'letter', orientation: 'portrait' },
+            filename: userNameUI.value.trim()
+        })
         .from(resultPageUI)
         .save();
 }
