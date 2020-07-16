@@ -182,7 +182,21 @@ const findLuckyNumberFromName = (name) => {
             sum = 0;
         }
     }
-    let luckyNumberInfo = "<i class='fa fa-arrow-circle-right'></i><b> আপনার লাকি নম্বর : </b>" + englishToBangaliNumber(sum.toString());
+    let luckyNumber = englishToBangaliNumber(sum.toString())
+    let luckyNumberInfo = "<i class='fa fa-arrow-circle-right'></i><b> আপনার লাকি নম্বর : </b>" + luckyNumber;
+    let paragraph = document.createElement("p");
+    paragraph.innerHTML = luckyNumberInfo;
+    paragraph.classList = "card-text text-dark text-justify";
+    mainResultContent.appendChild(paragraph);
+
+    // luck from lucky number
+    LuckFromLuckyNumber(sum);
+}
+
+
+// luck from lucky number
+const LuckFromLuckyNumber = (luckyNumber) => {
+    let luckyNumberInfo = "<i class='fa fa-arrow-circle-right'></i><b> লাকি নম্বর থেকে ভাগ্য বিচার : </b>" + LuckFromLuckyNumberDict[luckyNumber];
     let paragraph = document.createElement("p");
     paragraph.innerHTML = luckyNumberInfo;
     paragraph.classList = "card-text text-dark text-justify";
@@ -228,8 +242,6 @@ const calculateBtnHandler = () => {
         findLuckFromColor(data['favcolor']);
         // find luck from first letters
         luckFromFirstLetter(data['name'], sep[2], sep[1]);
-        
-
     }
 }
 
@@ -259,35 +271,3 @@ calculateBtnUI.addEventListener('click', calculateBtnHandler);
 calculateAgainBtnUI.addEventListener('click',calculateAgainHandler);
 downloadPageBtnUI.addEventListener('click', downloadPageHandler);
 
-
-// handle date and time
-// date1
-// Wed Jul 15 2020 09:41:15 GMT+0530 (India Standard Time)
-// let date = '23/02/2019';
-// undefined
-// date.split('/')
-// (3) ["23", "02", "2019"]
-// sep = date.split('/')
-// (3) ["23", "02", "2019"]
-// sep
-// (3) ["23", "02", "2019"]
-// date1.setDate(sep[0])
-// 1595477475398
-// date1.setMonth(+sep[1] -1)
-// 1582431075398
-// date1.setYear(sep[2])
-// 1550895075398
-// date1
-// Sat Feb 23 2019 09:41:15 GMT+0530 (India Standard Time)
-// let time = '13:50';
-// undefined
-// time
-// "13:50"
-// sep2 = time.split(':')
-// (2) ["13", "50"]
-// date1.setHours(sep2[0],sep2[1]);
-// 1550910015398
-// date1
-// Sat Feb 23 2019 13:50:15 GMT+0530 (India Standard Time)
-// date1
-// Sat Feb 23 2019 13:50:15 GMT+0530 (India Standard Time)
